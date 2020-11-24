@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTrader.Domain", "SimpleTrader.Domain\SimpleTrader.Domain.csproj", "{E69CBFC3-B3BE-4012-BD31-203CAD1A5F6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleTrader.Domain", "SimpleTrader.Domain\SimpleTrader.Domain.csproj", "{E69CBFC3-B3BE-4012-BD31-203CAD1A5F6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTrader.EntityFramework", "SimpleTrader.EntityFramework\SimpleTrader.EntityFramework.csproj", "{EC810AD3-D77D-4B09-BBCB-EBE51A11FA1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleTrader.EntityFramework", "SimpleTrader.EntityFramework\SimpleTrader.EntityFramework.csproj", "{EC810AD3-D77D-4B09-BBCB-EBE51A11FA1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTrader.WPF", "SimpleTrader.WPF\SimpleTrader.WPF.csproj", "{0341F503-978B-46B2-806A-4A631BE6F2FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleTrader.WPF", "SimpleTrader.WPF\SimpleTrader.WPF.csproj", "{0341F503-978B-46B2-806A-4A631BE6F2FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTrader.FinancialModelingPrepAPI", "SimpleTrader.FinancialModelingPrepAPI\SimpleTrader.FinancialModelingPrepAPI.csproj", "{59B26A95-2260-4B45-9676-EF86D98AA107}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{0341F503-978B-46B2-806A-4A631BE6F2FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0341F503-978B-46B2-806A-4A631BE6F2FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0341F503-978B-46B2-806A-4A631BE6F2FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59B26A95-2260-4B45-9676-EF86D98AA107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59B26A95-2260-4B45-9676-EF86D98AA107}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59B26A95-2260-4B45-9676-EF86D98AA107}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59B26A95-2260-4B45-9676-EF86D98AA107}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
