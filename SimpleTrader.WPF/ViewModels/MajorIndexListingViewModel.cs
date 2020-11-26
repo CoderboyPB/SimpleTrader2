@@ -7,17 +7,37 @@ using System.Threading.Tasks;
 
 namespace SimpleTrader.WPF.ViewModels
 {
-    public class MajorIndexViewModel
+    public class MajorIndexListingViewModel : ViewModelBase
     {
         private readonly IMajorIndexService majorIndexService;
-        public MajorIndexViewModel(IMajorIndexService majorIndexService)
+        public MajorIndexListingViewModel(IMajorIndexService majorIndexService)
         {
             this.majorIndexService = majorIndexService;
         }
 
-        public MajorIndex DowJones { get; set; }
-        public MajorIndex Nasdaq { get; set; }
-        public MajorIndex SP500 { get; set; }
+        private MajorIndex dowjones;        
+
+        public MajorIndex DowJones
+        {
+            get { return dowjones; }
+            set { dowjones = value; OnPropertyChanged("DowJones"); }
+        }
+
+        private MajorIndex nasdaq;
+
+        public MajorIndex Nasdaq
+        {
+            get { return nasdaq; }
+            set { nasdaq = value; OnPropertyChanged("Nasdaq"); }
+        }
+
+        private MajorIndex sp500;
+
+        public MajorIndex SP500
+        {
+            get { return sp500; }
+            set { sp500 = value; OnPropertyChanged("SP500"); }
+        }
 
         private void LoadMajorIndexes()
         {
@@ -44,9 +64,9 @@ namespace SimpleTrader.WPF.ViewModels
             });
         }
 
-        public static MajorIndexViewModel LoadMajorIndexViewModel(IMajorIndexService majorIndexService)
+        public static MajorIndexListingViewModel LoadMajorIndexViewModel(IMajorIndexService majorIndexService)
         {
-            MajorIndexViewModel majorIndexViewModel = new MajorIndexViewModel(majorIndexService);
+            MajorIndexListingViewModel majorIndexViewModel = new MajorIndexListingViewModel(majorIndexService);
             majorIndexViewModel.LoadMajorIndexes();
             return majorIndexViewModel;
         }
