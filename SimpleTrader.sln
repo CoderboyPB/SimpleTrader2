@@ -9,7 +9,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleTrader.EntityFramewor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleTrader.WPF", "SimpleTrader.WPF\SimpleTrader.WPF.csproj", "{0341F503-978B-46B2-806A-4A631BE6F2FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTrader.FinancialModelingPrepAPI", "SimpleTrader.FinancialModelingPrepAPI\SimpleTrader.FinancialModelingPrepAPI.csproj", "{59B26A95-2260-4B45-9676-EF86D98AA107}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleTrader.FinancialModelingPrepAPI", "SimpleTrader.FinancialModelingPrepAPI\SimpleTrader.FinancialModelingPrepAPI.csproj", "{59B26A95-2260-4B45-9676-EF86D98AA107}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{D5C726EE-63A5-4D49-8F86-8B826AF24C33}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{D9739265-8840-49ED-851C-E62D25659ED0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business Logic", "Business Logic", "{6834EA9F-1ADB-4827-9F48-04EF4E1B04AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{77231993-AACB-4C27-93AE-B31E4DB8B706}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +44,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E69CBFC3-B3BE-4012-BD31-203CAD1A5F6F} = {D5C726EE-63A5-4D49-8F86-8B826AF24C33}
+		{EC810AD3-D77D-4B09-BBCB-EBE51A11FA1C} = {D9739265-8840-49ED-851C-E62D25659ED0}
+		{0341F503-978B-46B2-806A-4A631BE6F2FA} = {77231993-AACB-4C27-93AE-B31E4DB8B706}
+		{59B26A95-2260-4B45-9676-EF86D98AA107} = {6834EA9F-1ADB-4827-9F48-04EF4E1B04AC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {748C8251-AC5C-4DC8-B1AA-CCE3E98C1486}

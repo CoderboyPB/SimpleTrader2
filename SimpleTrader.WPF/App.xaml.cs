@@ -1,4 +1,8 @@
-﻿using SimpleTrader.FinancialModelingPrepAPI.Services;
+﻿using SimpleTrader.Domain.Models;
+using SimpleTrader.Domain.Services;
+using SimpleTrader.Domain.Services.TransactionServices;
+using SimpleTrader.EntityFramework.Services;
+using SimpleTrader.FinancialModelingPrepAPI.Services;
 using SimpleTrader.WPF.ViewModels;
 using System;
 using System.Collections.Generic;

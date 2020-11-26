@@ -10,17 +10,17 @@ using System.Threading.Tasks;
 
 namespace SimpleTrader.EntityFramework.Services
 {
-    public class GenericDataService<T> : IDataService<T> where T : DomainObject
+    public class AccountDataService : IDataService<Account>
     {
         private readonly SimpleTraderDbContextFactory _contextFactory;
-        private readonly NonQueryDataService<T> _nonQueryDataService;
-        public GenericDataService(SimpleTraderDbContextFactory simpleTraderDbContextFactory)
+        private readonly NonQueryDataService<Account> _nonQueryDataService;
+        public AccountDataService(SimpleTraderDbContextFactory simpleTraderDbContextFactory)
         {
             _contextFactory = simpleTraderDbContextFactory;
-            _nonQueryDataService = new NonQueryDataService<T>(simpleTraderDbContextFactory);
+            _nonQueryDataService = new NonQueryDataService<Account>(simpleTraderDbContextFactory);
         }
 
-        public async Task<T> Create(T entity) 
+        public async Task<Account> Create(Account entity)
         {
             return await _nonQueryDataService.Create(entity);
         }
@@ -30,25 +30,26 @@ namespace SimpleTrader.EntityFramework.Services
             return await _nonQueryDataService.Delete(id);
         }
 
-        public async Task<IEnumerable<T>> GetAll()
+        public async Task<IEnumerable<Account>> GetAll()
         {
             using (SimpleTraderDbContext context = _contextFactory.CreateDbContext())
             {
-                return await context.Set<T>().ToListAsync();
+                return await context.Accounts.Include(a => a.AssetTransactions).ToListAsync();
             }
         }
 
-        public async Task<T> GetById(int id)
+        public async Task<Account> GetById(int id)
         {
             using (SimpleTraderDbContext context = _contextFactory.CreateDbContext())
             {
-                return await context.Set<T>().FirstOrDefaultAsync(e => e.Id == id);
+                return await context.Accounts.Include(a => a.AssetTransactions).FirstOrDefaultAsync(e => e.Id == id);
             }
         }
 
-        public async Task<T> Update(int id, T entity)
+        public async Task<Account> Update(int id, Account entity)
         {
             return await _nonQueryDataService.Update(id, entity);
         }
     }
 }
+
