@@ -6,15 +6,19 @@ using System.Text;
 
 namespace SimpleTrader.WPF.ViewModels.Factories
 {
-    public class SimpleTraderViewModelAbstractFactory : ISimpleTraderViewModelAbstractFactory
+    public class RootTraderViewModelFactory : IRootSimpleTraderViewModelFactory
     {
         private ISimpleTraderViewModelFactory<HomeViewModel> homeViewModelFactory;
         private ISimpleTraderViewModelFactory<PortfolioViewModel> portfolioViewModelFactory;
+        private BuyViewModel buyViewModel;
 
-        public SimpleTraderViewModelAbstractFactory(ISimpleTraderViewModelFactory<HomeViewModel> homeViewModelFactory, ISimpleTraderViewModelFactory<PortfolioViewModel> portfolioViewModelFactory)
+        public RootTraderViewModelFactory(ISimpleTraderViewModelFactory<HomeViewModel> homeViewModelFactory, 
+            ISimpleTraderViewModelFactory<PortfolioViewModel> portfolioViewModelFactory,
+            BuyViewModel buyViewModel)
         {
             this.homeViewModelFactory = homeViewModelFactory;
             this.portfolioViewModelFactory = portfolioViewModelFactory;
+            this.buyViewModel = buyViewModel;
         }
 
         public ViewModelBase CreateViewModel(ViewType viewType)
@@ -25,6 +29,8 @@ namespace SimpleTrader.WPF.ViewModels.Factories
                     return homeViewModelFactory.CreateViewModel();
                 case ViewType.Portfolio:
                     return portfolioViewModelFactory.CreateViewModel();
+                case ViewType.Buy:
+                    return buyViewModel;
                 default:
                     throw new ArgumentException("The ViewType does not have a ViewModel", "viewType");
             }

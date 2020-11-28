@@ -12,11 +12,11 @@ namespace SimpleTrader.WPF.Commands
     public class UpdateCurrentViewModelCommand : ICommand
     {
         private readonly INavigator navigator;
-        private readonly ISimpleTraderViewModelAbstractFactory viewModelAbstractFactory;
+        private readonly IRootSimpleTraderViewModelFactory viewModelAbstractFactory;
 
         public event EventHandler CanExecuteChanged;
 
-        public UpdateCurrentViewModelCommand(INavigator navigator, ISimpleTraderViewModelAbstractFactory viewModelAbstractFactory)
+        public UpdateCurrentViewModelCommand(INavigator navigator, IRootSimpleTraderViewModelFactory viewModelAbstractFactory)
         {
             this.navigator = navigator;
             this.viewModelAbstractFactory = viewModelAbstractFactory;

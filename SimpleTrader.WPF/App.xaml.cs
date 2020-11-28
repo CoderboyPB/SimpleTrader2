@@ -44,15 +44,14 @@ namespace SimpleTrader.WPF
             services.AddSingleton<IBuyStockService, BuyStockService>();
             services.AddSingleton<IMajorIndexService, MajorIndexService>();
 
-            services.AddSingleton<ISimpleTraderViewModelAbstractFactory, SimpleTraderViewModelAbstractFactory>();
+            services.AddSingleton<IRootSimpleTraderViewModelFactory, RootTraderViewModelFactory>();
             services.AddSingleton<ISimpleTraderViewModelFactory<HomeViewModel>, HomeViewModelFactory>();
             services.AddSingleton<ISimpleTraderViewModelFactory<PortfolioViewModel>, PortfolioViewModelFactory>();
             services.AddSingleton<ISimpleTraderViewModelFactory<MajorIndexListingViewModel>, MajorIndexListingViewModelFactory>();
-
-
-
+        
             services.AddScoped<MainViewModel>();
             services.AddScoped<INavigator, Navigator>();
+            services.AddScoped<BuyViewModel>();
 
             return services.BuildServiceProvider();
         }
