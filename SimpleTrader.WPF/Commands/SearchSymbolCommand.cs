@@ -31,6 +31,7 @@ namespace SimpleTrader.WPF.Commands
             {
                 double stockPrice = await stockPriceService.GetPrice(viewModel.Symbol);
                 viewModel.StockPrice = stockPrice;
+                viewModel.SearchResultSymbol = viewModel.Symbol.ToUpper();
             }
             catch (Exception e)
             {

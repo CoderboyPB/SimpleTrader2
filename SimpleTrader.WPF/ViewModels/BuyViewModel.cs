@@ -28,11 +28,27 @@ namespace SimpleTrader.WPF.ViewModels
             set { _symbol = value; OnPropertyChanged("Symbol"); }
         }
 
+        private string _searchResultSymbol = string.Empty;
+        public string SearchResultSymbol
+        {
+            get { return _searchResultSymbol; }
+            set 
+            { 
+                _searchResultSymbol = value; 
+                OnPropertyChanged(nameof(SearchResultSymbol));
+            }
+        }
+
         private double _stockPrice;
         public double StockPrice
         {
             get { return _stockPrice; }
-            set { _stockPrice = value; OnPropertyChanged("StockPrice"); }
+            set 
+            { 
+                _stockPrice = value; 
+                OnPropertyChanged("StockPrice");
+                OnPropertyChanged(nameof(TotalPrice));
+            }
         }
 
         private int _sharesToBuy;
