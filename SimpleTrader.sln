@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business Logic", "Business 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{77231993-AACB-4C27-93AE-B31E4DB8B706}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTrader.Domain.Tests", "SimpleTrader.Domain.Tests\SimpleTrader.Domain.Tests.csproj", "{B329DC6B-241E-43BB-B05B-0414E81AE62E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{59B26A95-2260-4B45-9676-EF86D98AA107}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59B26A95-2260-4B45-9676-EF86D98AA107}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59B26A95-2260-4B45-9676-EF86D98AA107}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B329DC6B-241E-43BB-B05B-0414E81AE62E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B329DC6B-241E-43BB-B05B-0414E81AE62E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B329DC6B-241E-43BB-B05B-0414E81AE62E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B329DC6B-241E-43BB-B05B-0414E81AE62E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

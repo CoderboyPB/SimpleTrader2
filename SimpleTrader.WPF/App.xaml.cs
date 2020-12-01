@@ -29,9 +29,7 @@ namespace SimpleTrader.WPF
         {
             
             IServiceProvider serviceProvider = CreateServiceProvider();
-            IAuthenticationService authentication = serviceProvider.GetRequiredService<IAuthenticationService>();
-            authentication.Login("SingletonSean", "password123");
-           
+            
             Window window = new MainWindow();
             window.DataContext = serviceProvider.GetRequiredService<MainViewModel>();
             window.Show();
