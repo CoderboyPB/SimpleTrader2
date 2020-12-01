@@ -5,20 +5,29 @@
              xmlns:views="clr-namespace:SimpleTrader.WPF.Views"
              xmlns:local="clr-namespace:SimpleTrader.WPF">
     <Application.Resources>
-        
+
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/Common.xaml"/>
                 <ResourceDictionary Source="/Styles/NavigationBar.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
 
-        <!--<DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
-            <views:HomeView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:PortfolioViewModel}">
-            <views:PortfolioView/>
-        </DataTemplate>-->
-        
+            <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
+                <views:HomeView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:PortfolioViewModel}">
+                <views:PortfolioView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:BuyViewModel}">
+                <views:BuyView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
+                <views:LoginView LoginCommand="{Binding LoginCommand}"/>
+            </DataTemplate>
+
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

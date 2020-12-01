@@ -9,17 +9,6 @@
         xmlns:controls="clr-namespace:SimpleTrader.WPF.Controls"
         mc:Ignorable="d"
         Title="Simple Trader" Height="450" Width="800">
-    <Window.Resources>
-        <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
-            <views:HomeView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:PortfolioViewModel}">
-            <views:PortfolioView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:BuyViewModel}">
-            <views:BuyView/>
-        </DataTemplate>
-    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
