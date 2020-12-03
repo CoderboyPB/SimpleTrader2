@@ -9,7 +9,6 @@ namespace SimpleTrader.WPF.State.Navigators
     public interface INavigator
     {
         ViewModelBase CurrentViewModel { get; set; }
-        public ICommand UpdateCurrentViewModelCommand { get; }
     }
 
     public enum ViewType
