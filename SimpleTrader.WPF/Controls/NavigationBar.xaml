@@ -37,7 +37,7 @@
                          IsChecked="{Binding Navigator.CurrentViewModel, Converter={StaticResource equalToParameterValueConerter}, ConverterParameter={x:Type vm:HomeViewModel}, Mode=OneWay}" 
                          Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Home}"/>
             <RadioButton Grid.Column="1" Content="Portfolio"
-                         IsChecked="{Binding NavigatorCurrentViewModel, Converter={StaticResource equalToParameterValueConerter}, ConverterParameter={x:Type vm:PortfolioViewModel}, Mode=OneWay}"
+                         IsChecked="{Binding Navigator.CurrentViewModel, Converter={StaticResource equalToParameterValueConerter}, ConverterParameter={x:Type vm:PortfolioViewModel}, Mode=OneWay}"
                          Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Portfolio}"/>
             <RadioButton Grid.Column="2" Content="Buy"
                          IsChecked="{Binding Navigator.CurrentViewModel, Converter={StaticResource equalToParameterValueConerter}, ConverterParameter={x:Type vm:BuyViewModel}, Mode=OneWay}"

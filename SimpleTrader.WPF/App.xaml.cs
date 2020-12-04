@@ -31,8 +31,7 @@ namespace SimpleTrader.WPF
             
             IServiceProvider serviceProvider = CreateServiceProvider();
             
-            Window window = new MainWindow();
-            window.DataContext = serviceProvider.GetRequiredService<MainViewModel>();
+            Window window = serviceProvider.GetRequiredService<MainWindow>();
             window.Show();
 
             base.OnStartup(e);
@@ -57,16 +56,31 @@ namespace SimpleTrader.WPF
             services.AddSingleton<ISimpleTraderViewModelFactory<PortfolioViewModel>, PortfolioViewModelFactory>();
             services.AddSingleton<ISimpleTraderViewModelFactory<MajorIndexListingViewModel>, MajorIndexListingViewModelFactory>();
 
-            services.AddSingleton<ISimpleTraderViewModelFactory<LoginViewModel>>((services) =>
-                new LoginViewModelFactory(services.GetRequiredService<IAuthenticator>(),
-                new ViewModelFactoryRenavigator<HomeViewModel>(services.GetRequiredService<INavigator>(),
-                    services.GetRequiredService<ISimpleTraderViewModelFactory<HomeViewModel>>())));
+            //services.AddSingleton<ISimpleTraderViewModelFactory<LoginViewModel>>((services) =>
+            //    new LoginViewModelFactory(services.GetRequiredService<IAuthenticator>(), new ViewModelFactoryRenavigator<HomeViewModel>
+            //    (services.GetRequiredService<INavigator>(), services.GetRequiredService<ISimpleTraderViewModelFactory<HomeViewModel>>())
+            //    )
+            //);
+
+            services.AddSingleton<ISimpleTraderViewModelFactory<LoginViewModel>>
+                (serviceProvider =>
+                    new LoginViewModelFactory
+                    (
+                        serviceProvider.GetRequiredService<IAuthenticator>(), 
+                        new ViewModelFactoryRenavigator<HomeViewModel>
+                        (
+                            serviceProvider.GetRequiredService<INavigator>(), 
+                            serviceProvider.GetRequiredService<ISimpleTraderViewModelFactory<HomeViewModel>>()
+                        )
+                    )
+                );
 
             services.AddScoped<MainViewModel>();
             services.AddScoped<INavigator, Navigator>();
             services.AddScoped<IAuthenticator, Authenticator>();
             services.AddScoped<BuyViewModel>();
 
+            services.AddScoped<MainWindow>(s => new MainWindow(s.GetRequiredService<MainViewModel>()));
             return services.BuildServiceProvider();
         }
     }
