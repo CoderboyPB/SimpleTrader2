@@ -41,14 +41,14 @@ namespace SimpleTrader.EntityFramework.Services
             }
         }
 
-        public async Task<Account> GetByEmail(string email)
+        public Task<Account> GetByEmail(string email)
         {
             using (SimpleTraderDbContext context = _contextFactory.CreateDbContext())
             {
-                return context.Accounts
+                return Task.FromResult(context.Accounts
                     .Include(a => a.AccountHolder)
                     .Include(a => a.AssetTransactions)
-                    .FirstOrDefault(a => a.AccountHolder.Email == email);
+                    .FirstOrDefault(a => a.AccountHolder.Email == email));
             }
         }
 
@@ -63,14 +63,14 @@ namespace SimpleTrader.EntityFramework.Services
             }
         }
 
-        public async Task<Account> GetByUsername(string username)
+        public Task<Account> GetByUsername(string username)
         {
             using(SimpleTraderDbContext context = _contextFactory.CreateDbContext())
             {
-                return context.Accounts
+                return Task.FromResult(context.Accounts
                     .Include(a => a.AccountHolder)
                     .Include(a => a.AssetTransactions)
-                    .FirstOrDefault(a => a.AccountHolder.Username == username);
+                    .FirstOrDefault(a => a.AccountHolder.Username == username));
             }
         }
 

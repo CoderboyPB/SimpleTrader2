@@ -3,12 +3,13 @@ using SimpleTrader.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
 namespace SimpleTrader.WPF.Commands
 {
-    class SearchSymbolCommand : ICommand
+    class SearchSymbolCommand : AsyncCommandBase
     {
         private readonly BuyViewModel viewModel;
         private readonly IStockPriceService stockPriceService;
@@ -18,14 +19,8 @@ namespace SimpleTrader.WPF.Commands
             this.viewModel = viewModel;
             this.stockPriceService = stockPriceService;
         }
-        public event EventHandler CanExecuteChanged;
-
-        public bool CanExecute(object parameter)
-        {
-            return true;
-        }
-
-        public async void Execute(object parameter)
+       
+        public override async Task ExecuteAsync(object parameter)
         {
             try
             {
@@ -33,9 +28,13 @@ namespace SimpleTrader.WPF.Commands
                 viewModel.StockPrice = stockPrice;
                 viewModel.SearchResultSymbol = viewModel.Symbol.ToUpper();
             }
-            catch (Exception e)
+            catch (InvalidCastException)
             {
-                MessageBox.Show(e.Message);
+                viewModel.ErrorMessage = "Symbol does not Exist";
+            }
+            catch (Exception)
+            {
+                viewModel.ErrorMessage = "Failed to get symbol information.";
             }
         }
     }
