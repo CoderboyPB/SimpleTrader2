@@ -6,12 +6,19 @@ using System.Text;
 
 namespace SimpleTrader.EntityFramework
 {
-    public class SimpleTraderDbContextFactory : IDesignTimeDbContextFactory<SimpleTraderDbContext>
+    public class SimpleTraderDbContextFactory
     {
-        public SimpleTraderDbContext CreateDbContext(string[] args = null)
+        private readonly string connectionString;
+
+        public SimpleTraderDbContextFactory(string connectionString)
+        {
+            this.connectionString = connectionString;
+        }
+
+        public SimpleTraderDbContext CreateDbContext()
         {
             var options = new DbContextOptionsBuilder<SimpleTraderDbContext>();
-            options.UseSqlServer(@"Data Source=LAPTOP-196PCGN4\SQLEXPRESS;Initial Catalog=SimpleTraderDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            options.UseSqlServer(connectionString);
 
             return new SimpleTraderDbContext(options.Options);
         }
