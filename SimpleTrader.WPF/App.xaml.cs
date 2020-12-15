@@ -60,6 +60,7 @@ namespace SimpleTrader.WPF
                     services.AddSingleton<IDataService<Account>, AccountDataService>();
                     services.AddSingleton<IAccountService, AccountDataService>();
                     services.AddSingleton<IBuyStockService, BuyStockService>();
+                    services.AddSingleton<ISellStockService, SellStockService>();
                     services.AddSingleton<IMajorIndexService, MajorIndexService>();
 
                     services.AddSingleton<IPasswordHasher, PasswordHasher>();
@@ -69,6 +70,9 @@ namespace SimpleTrader.WPF
                     services.AddSingleton<PortfolioViewModel>();
                     services.AddSingleton<AssetSummaryViewModel>();
                     services.AddSingleton<ViewModelDelegateRenavigator<HomeViewModel>>();
+                    services.AddSingleton<ViewModelDelegateRenavigator<RegisterViewModel>>();
+                    services.AddSingleton<ViewModelDelegateRenavigator<LoginViewModel>>();
+
                     services.AddSingleton<HomeViewModel>
                         (s =>
                             new HomeViewModel(MajorIndexListingViewModel.LoadMajorIndexViewModel
@@ -92,11 +96,21 @@ namespace SimpleTrader.WPF
                         return () => s.GetRequiredService<PortfolioViewModel>();
                     });
 
+                    services.AddSingleton<CreateViewModel<RegisterViewModel>>(s =>
+                    {
+                        return () => new RegisterViewModel(
+                            s.GetRequiredService<IAuthenticator>(),
+                            s.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>(),
+                            s.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>()
+                            );
+                    });
+
                     services.AddSingleton<CreateViewModel<LoginViewModel>>(s =>
                     {
                         return () => new LoginViewModel(
                             s.GetRequiredService<IAuthenticator>(),
-                            s.GetRequiredService<ViewModelDelegateRenavigator<HomeViewModel>>()
+                            s.GetRequiredService<ViewModelDelegateRenavigator<HomeViewModel>>(),
+                            s.GetRequiredService<ViewModelDelegateRenavigator<RegisterViewModel>>()
                             );
                     });
 

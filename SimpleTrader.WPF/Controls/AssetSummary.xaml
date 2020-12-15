@@ -32,43 +32,10 @@
 
             <TextBlock Grid.Row="0" FontSize="18" Text="Top Assets"/>
 
-            <ListView Grid.Row="1" FontSize="14" ItemsSource="{Binding TopAssets}" 
-                      Margin="0 10 0 0" BorderThickness="0">
-                <ListView.View>
-                    <GridView>
-                        <GridView.ColumnHeaderContainerStyle>
-                            <Style TargetType="GridViewColumnHeader">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="GridViewColumnHeader">
-                                            <Border BorderBrush="gray" BorderThickness="0 0 0 1" Padding="0 5 50 5">
-                                                <TextBlock Text="{TemplateBinding Content}"/>
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </GridView.ColumnHeaderContainerStyle>
-                        <GridView.Columns>
-                            <GridViewColumn Header="Symbol" DisplayMemberBinding="{Binding Symbol}"/>
-                            <GridViewColumn Header="Shares" DisplayMemberBinding="{Binding Shares}"/>
-                        </GridView.Columns>
-                    </GridView> 
-                </ListView.View>
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="ListViewItem">
-                                    <Grid Margin="0 10">
-                                        <GridViewRowPresenter TextBlock.Foreground="Black" Content="{TemplateBinding Content}"/>
-                                    </Grid>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ListView.ItemContainerStyle>
-            </ListView>
+            <local:AssetListing DataContext="{Binding AssetListingViewModel}"
+                                Grid.Row="1" 
+                                Margin="0 10 0 0" 
+                                FontSize="14"/>
         </Grid>
 
     </Grid>

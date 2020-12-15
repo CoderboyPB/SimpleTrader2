@@ -11,14 +11,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SimpleTrader.WPF.Views
+namespace SimpleTrader.WPF.Controls
 {
     /// <summary>
-    /// Interaktionslogik für LoginView.xaml
+    /// Interaktionslogik für AssetListing.xaml
     /// </summary>
-    public partial class LoginView : UserControl
+    public partial class AssetListing : UserControl
     {
-        public LoginView()
+        public AssetListing()
         {
             InitializeComponent();
         }

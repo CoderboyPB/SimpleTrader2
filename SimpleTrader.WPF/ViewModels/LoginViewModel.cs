@@ -21,7 +21,19 @@ namespace SimpleTrader.WPF.ViewModels
             }
         }
 
+        private string password = "password123";
+        public string Password
+        {
+            get { return password; }
+            set 
+            { 
+                password = value;
+                OnPropertyChanged(nameof(Password));
+            }
+        }
+
         public ICommand LoginCommand { get; }
+        public ICommand ViewRegisterCommand { get; }
 
         public MessageViewModel ErrorMessageViewModel { get; }
         public string ErrorMessage
@@ -29,9 +41,11 @@ namespace SimpleTrader.WPF.ViewModels
             set => ErrorMessageViewModel.Message = value;
         }
 
-        public LoginViewModel(IAuthenticator authenticator, IRenavigator renavigator)
+        public LoginViewModel(IAuthenticator authenticator, IRenavigator loginRenavigator, IRenavigator registerRenavigator )
         {
-            LoginCommand = new LoginCommand(this, authenticator, renavigator);
+            LoginCommand = new LoginCommand(this, authenticator, loginRenavigator);
+            ViewRegisterCommand = new RenavigateCommand(registerRenavigator);
+
             ErrorMessageViewModel = new MessageViewModel();
         }
     }

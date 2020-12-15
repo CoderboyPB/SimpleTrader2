@@ -13,8 +13,11 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <controls:AssetSummary Grid.Row="0" Margin="10 10" DataContext="{Binding AssetSummaryViewModel}"/>
+        <controls:AssetSummary Grid.Row="0" 
+                               Margin="10 10" 
+                               DataContext="{Binding AssetSummaryViewModel}"/>
 
-        <controls:MajorIndexListing Grid.Row="1" Margin="10 10" />
+        <controls:MajorIndexListing Grid.Row="1" 
+                                    Margin="10 10" />
     </Grid>
 </UserControl>
