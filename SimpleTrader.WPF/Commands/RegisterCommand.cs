@@ -27,8 +27,8 @@ namespace SimpleTrader.WPF.Commands
         {
             registerViewModel.ErrorMessage = string.Empty;
 
-            try
-            {
+            //try
+            //{
                 RegistrationResult registrationResult = await authenticator.Register(
                         registerViewModel.Email,
                         registerViewModel.Username,
@@ -53,11 +53,11 @@ namespace SimpleTrader.WPF.Commands
                         registerViewModel.ErrorMessage = "Registration failed.";
                         break;
                 }
-            }
-            catch (Exception)
-            {
-                registerViewModel.ErrorMessage = "Registration failed.";
-            }
+            //}
+            //catch (Exception e)
+            //{
+            //    registerViewModel.ErrorMessage = "Registration failed.";
+            //}
         }
     }
 }

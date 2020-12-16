@@ -52,9 +52,10 @@ namespace SimpleTrader.WPF
                     string apikey = context.Configuration.GetValue<string>("FINANCE_API_KEY");
                     services.AddSingleton<FinancialModelingPrepHttpClientFactory>(new FinancialModelingPrepHttpClientFactory(apikey));
 
-                    string connectionString = context.Configuration.GetConnectionString("default");
-                    services.AddDbContext<SimpleTraderDbContext>(o => o.UseSqlServer(connectionString));
-                    services.AddSingleton<SimpleTraderDbContextFactory>(new SimpleTraderDbContextFactory(connectionString));
+                    string connectionString = context.Configuration.GetConnectionString("sqlite");
+                    Action<DbContextOptionsBuilder> configureDbContext = o => o.UseSqlite(connectionString);
+                    services.AddDbContext<SimpleTraderDbContext>(configureDbContext);
+                    services.AddSingleton<SimpleTraderDbContextFactory>(new SimpleTraderDbContextFactory(o => o.UseSqlite(connectionString)));
                     services.AddSingleton<IAuthenticationService, AuthenticationService>();
                     services.AddSingleton<IStockPriceService, StockPriceService>();
                     services.AddSingleton<IDataService<Account>, AccountDataService>();
@@ -127,6 +128,12 @@ namespace SimpleTrader.WPF
         protected override void OnStartup(StartupEventArgs e)
         {
             host.Start();
+
+            SimpleTraderDbContextFactory contextFactory = host.Services.GetRequiredService<SimpleTraderDbContextFactory>();
+            using(SimpleTraderDbContext context = contextFactory.CreateDbContext())
+            {
+                context.Database.Migrate();
+            }
 
             Window window = host.Services.GetRequiredService<MainWindow>();
             window.Show();
