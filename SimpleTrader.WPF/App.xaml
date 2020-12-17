@@ -32,6 +32,10 @@
                 <views:RegisterView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewmodels:SellViewModel}">
+                <views:SellView SelectedAssetChangedCommand="{Binding SearchSymbolCommand}"/>
+            </DataTemplate>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

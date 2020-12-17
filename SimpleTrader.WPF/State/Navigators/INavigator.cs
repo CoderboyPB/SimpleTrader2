@@ -17,6 +17,7 @@ namespace SimpleTrader.WPF.State.Navigators
         Home,
         Portfolio,
         Buy,
-        Login
+        Login,
+        Sell
     }
 }

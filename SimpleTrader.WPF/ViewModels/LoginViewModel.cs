@@ -10,7 +10,7 @@ namespace SimpleTrader.WPF.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
-        private string _username = "SingletonSean";
+        private string _username = "CoderboyPB";
         public string Username
         {
             get { return _username; }
@@ -21,7 +21,7 @@ namespace SimpleTrader.WPF.ViewModels
             }
         }
 
-        private string password = "password123";
+        private string password;
         public string Password
         {
             get { return password; }

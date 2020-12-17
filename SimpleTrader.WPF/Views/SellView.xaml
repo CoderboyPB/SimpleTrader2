@@ -1,10 +1,9 @@
-﻿<UserControl x:Class="SimpleTrader.WPF.Views.BuyView"
+﻿<UserControl x:Class="SimpleTrader.WPF.Views.SellView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SimpleTrader.WPF.Views"
-             xmlns:controls="clr-namespace:SimpleTrader.WPF.Controls"
+             xmlns:local="clr-namespace:SimpleTrader.WPF.Views" xmlns:controls="clr-namespace:SimpleTrader.WPF.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -18,10 +17,22 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <WrapPanel Grid.Row="0" HorizontalAlignment="Center">
-            <TextBox CharacterCasing="Upper" Width="100" Text="{Binding Symbol, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-            <Button Margin="10 0 0 0" Content="Search" Command="{Binding SearchSymbolCommand}"/>
-        </WrapPanel>
+        <ComboBox Grid.Row="0"
+                  x:Name="cbAssets"
+                  Width="300"
+                  ItemsSource="{Binding AssetListingViewModel.Assets}"
+                  SelectedItem="{Binding SelectedAsset}"
+                  SelectionChanged="cbAssets_SelectionChanged">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Symbol}"/>
+                        <Border BorderBrush="Black" BorderThickness="1 0 0 0" Margin="10 0"/>
+                        <TextBlock Text="{Binding Shares}"/>
+                    </StackPanel>
+                </DataTemplate> 
+            </ComboBox.ItemTemplate>
+        </ComboBox>
 
         <TextBlock DataContext="{Binding ErrorMessageViewModel}" HorizontalAlignment="Center"
                    Grid.Row="1" Text="{Binding Message}" Foreground="DarkRed"
@@ -31,11 +42,11 @@
                    Grid.Row="2" Text="{Binding Message}" Foreground="DarkGreen"
                    Visibility="{Binding HasMessage, Converter={StaticResource booleanToVisibilityConverter}}"/>
 
-        <controls:SearchSymbolResultPanel Grid.Row="3" Margin="0 20 0 0">
+        <controls:SearchSymbolResultPanel Grid.Row="4" Margin="0 20 0 0">
             <StackPanel HorizontalAlignment="Center">
                 <WrapPanel Margin="0 10">
                     <TextBlock HorizontalAlignment="Center" Width="150" Text="Shares to buye:"/>
-                    <TextBox Width="50" Text="{Binding SharesToBuy, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Width="50" Text="{Binding SharesToSell, UpdateSourceTrigger=PropertyChanged}"/>
                 </WrapPanel>
                 <WrapPanel Margin="0 10">
                     <TextBlock Text="Price per share" HorizontalAlignment="Center" Width="150"/>
@@ -43,7 +54,7 @@
                 </WrapPanel>
                 <TextBlock FontSize="32" Margin="0 10" Text="{Binding TotalPrice, StringFormat={}{0:C}}" 
                                HorizontalAlignment="Center"/>
-                <Button Margin="0 10" Content="Buy" FontSize="24" Command="{Binding BuyStockCommand}"
+                <Button Margin="0 10" Content="Sell" FontSize="24" Command="{Binding SellStockCommand}"
                             Padding="20 5"/>
             </StackPanel>
         </controls:SearchSymbolResultPanel>
