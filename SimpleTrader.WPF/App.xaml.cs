@@ -11,6 +11,7 @@ using SimpleTrader.EntityFramework;
 using SimpleTrader.EntityFramework.Services;
 using SimpleTrader.FinancialModelingPrepAPI;
 using SimpleTrader.FinancialModelingPrepAPI.Services;
+using SimpleTrader.WPF.HostBuilders;
 using SimpleTrader.WPF.State.Accounts;
 using SimpleTrader.WPF.State.Assets;
 using SimpleTrader.WPF.State.Authenticators;
@@ -42,93 +43,13 @@ namespace SimpleTrader.WPF
         public static IHostBuilder CreateHostBuilder(string[] args = null)
         {
             return Host.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration(c =>
-                {
-                    c.AddJsonFile("appsettings.json");
-                    c.AddEnvironmentVariables();
-                })
-                .ConfigureServices((context,services) =>
-                {
-                    string apikey = context.Configuration.GetValue<string>("FINANCE_API_KEY");
-                    services.AddSingleton<FinancialModelingPrepHttpClientFactory>(new FinancialModelingPrepHttpClientFactory(apikey));
-
-                    string connectionString = context.Configuration.GetConnectionString("sqlite");
-                    Action<DbContextOptionsBuilder> configureDbContext = o => o.UseSqlite(connectionString);
-                    services.AddDbContext<SimpleTraderDbContext>(configureDbContext);
-                    services.AddSingleton<SimpleTraderDbContextFactory>(new SimpleTraderDbContextFactory(o => o.UseSqlite(connectionString)));
-                    services.AddSingleton<IAuthenticationService, AuthenticationService>();
-                    services.AddSingleton<IStockPriceService, StockPriceService>();
-                    services.AddSingleton<IDataService<Account>, AccountDataService>();
-                    services.AddSingleton<IAccountService, AccountDataService>();
-                    services.AddSingleton<IBuyStockService, BuyStockService>();
-                    services.AddSingleton<ISellStockService, SellStockService>();
-                    services.AddSingleton<IMajorIndexService, MajorIndexService>();
-
-                    services.AddSingleton<IPasswordHasher, PasswordHasher>();
-
-                    services.AddSingleton<ISimpleTraderViewModelFactory, SimpleTraderViewModelFactory>();
-                    services.AddSingleton<BuyViewModel>();
-                    services.AddSingleton<PortfolioViewModel>();
-                    services.AddSingleton<SellViewModel>();
-                    services.AddSingleton<AssetSummaryViewModel>();
-                    services.AddSingleton<ViewModelDelegateRenavigator<HomeViewModel>>();
-                    services.AddSingleton<ViewModelDelegateRenavigator<RegisterViewModel>>();
-                    services.AddSingleton<ViewModelDelegateRenavigator<LoginViewModel>>();
-
-                    services.AddSingleton<HomeViewModel>
-                        (s =>
-                            new HomeViewModel(MajorIndexListingViewModel.LoadMajorIndexViewModel
-                            (
-                                s.GetRequiredService<IMajorIndexService>()), s.GetRequiredService<AssetSummaryViewModel>()
-                            )
-                        );
-
-                    services.AddSingleton<CreateViewModel<HomeViewModel>>(s =>
-                    {
-                        return () => s.GetRequiredService<HomeViewModel>();
-                    });
-
-                    services.AddSingleton<CreateViewModel<BuyViewModel>>(s =>
-                    {
-                        return () => s.GetRequiredService<BuyViewModel>();
-                    });
-
-                    services.AddSingleton<CreateViewModel<PortfolioViewModel>>(s =>
-                    {
-                        return () => s.GetRequiredService<PortfolioViewModel>();
-                    });
-
-                    services.AddSingleton<CreateViewModel<RegisterViewModel>>(s =>
-                    {
-                        return () => new RegisterViewModel(
-                            s.GetRequiredService<IAuthenticator>(),
-                            s.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>(),
-                            s.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>()
-                            );
-                    });
-
-                    services.AddSingleton<CreateViewModel<LoginViewModel>>(s =>
-                    {
-                        return () => new LoginViewModel(
-                            s.GetRequiredService<IAuthenticator>(),
-                            s.GetRequiredService<ViewModelDelegateRenavigator<HomeViewModel>>(),
-                            s.GetRequiredService<ViewModelDelegateRenavigator<RegisterViewModel>>()
-                            );
-                    });
-
-                    services.AddSingleton<CreateViewModel<SellViewModel>>(s =>
-                    {
-                        return () => s.GetRequiredService<SellViewModel>();
-                    });
-
-                    services.AddScoped<MainViewModel>();
-                    services.AddSingleton<INavigator, Navigator>();
-                    services.AddSingleton<IAuthenticator, Authenticator>();
-                    services.AddSingleton<IAccountStore, AccountStore>();
-                    services.AddSingleton<AssetStore>();
-
-                    services.AddScoped<MainWindow>(s => new MainWindow(s.GetRequiredService<MainViewModel>()));
-                });
+                .AddConfiguration()
+                .AddFinanceApi()
+                .AddDbContext()
+                .AddServices()
+                .AddStores()
+                .AddViewModels()
+                .AddViews();
         }
 
         protected override void OnStartup(StartupEventArgs e)
