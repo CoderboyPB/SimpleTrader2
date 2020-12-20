@@ -12,26 +12,23 @@ namespace SimpleTrader.FinancialModelingPrepAPI.Services
 {
     public class StockPriceService : IStockPriceService
     {
-        private readonly FinancialModelingPrepHttpClientFactory httpClientFactory;
-public StockPriceService(FinancialModelingPrepHttpClientFactory httpClientFactory)
+        private readonly FinancialModelingPrepHttpClient client;
+        public StockPriceService(FinancialModelingPrepHttpClient client)
         {
-            this.httpClientFactory = httpClientFactory;
+            this.client = client;
         }
 
         public async Task<double> GetPrice(string symbol)
         {
-            using (FinancialModelingPrepHttpClient client = httpClientFactory.CreateHttpClient())
+            string uri = $"stock/real-time-price/{symbol}";
+            StockPriceResult stockPriceResult = await client.GetAsync<StockPriceResult>(uri);
+
+            if(stockPriceResult.Price == 0)
             {
-                string uri = $"stock/real-time-price/{symbol}";
-                StockPriceResult stockPriceResult = await client.GetAsync<StockPriceResult>(uri);
-
-                if(stockPriceResult.Price == 0)
-                {
-                    throw new InvalidSymbolException(symbol);
-                }
-
-                return stockPriceResult.Price;
+                throw new InvalidSymbolException(symbol);
             }
+
+            return stockPriceResult.Price;    
         }
     }
 }
